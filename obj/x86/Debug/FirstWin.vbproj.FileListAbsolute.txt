@@ -1,0 +1,9 @@
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\bin\Debug\FirstWin.exe
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\bin\Debug\FirstWin.pdb
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\bin\Debug\FirstWin.xml
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.Resources.resources
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.vbproj.GenerateResource.Cache
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.exe
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.xml
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.pdb
+C:\Users\mis002\Desktop\ElijahMao\FirstWin\obj\x86\Debug\FirstWin.Form1.resources
