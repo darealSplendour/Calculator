@@ -1,4 +1,4 @@
-﻿Public Class Form1
+Public Class Form1
 
     Public P_Result As Double = 0, cal As Double = 0, flag As Boolean, oper As String
 
@@ -30,13 +30,13 @@
 
         Dim Btn As Button = CType(sender, Button)
 
-        If (TextBox1.Text = "0") Then
-            Label1.Text = ""
-            TextBox1.Text = ""
-        End If
-
         Select Case Btn.Text
+
             Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+                If (TextBox1.Text = "0") Then
+                    Label1.Text = ""
+                    TextBox1.Text = ""
+                End If
 
                 If (flag) Then
                     TextBox1.Text = ""
@@ -49,31 +49,27 @@
                 flag = False
 
             Case "CE"
-                TextBox1.Text = "0"
-
-                If (oper = "=") Then
-                    Label1.Text = ""
-                End If
+                TextBox1.Text = ""
 
             Case "C" '歸零
                 Label1.Text = ""
                 TextBox1.Text = "0"
                 cal = 0
                 P_Result = 0
+                oper = ""
                 Label2.Text = ""
 
             Case "←" '減少一位數
-                Dim length As Integer = TextBox1.Text.Length
+                Dim length As Integer = TextBox1.TextLength
 
                 If (length <= 1) Then
-                    Label1.Text &= ""
                     TextBox1.Text = "0"
                 Else
                     TextBox1.Text = Mid(TextBox1.Text, 1, length - 1)
                 End If
 
             Case "+", "-", "*", "/"
-                Dim length As Integer = TextBox1.Text.Length() '如果沒輸入數字，長度為0
+                Dim length As Integer = TextBox1.TextLength '如果沒輸入數字，長度為0
 
                 If (length > 0) Then
                     Label1.Text = TextBox1.Text
@@ -93,40 +89,42 @@
                 End If
 
             Case "="
-                If (Label1.Text <> "") Then
-                    If (Mid(Label1.Text, Label1.Text.Length, 1) <> "=") Then
-                        Label1.Text = Label1.Text + TextBox1.Text + "="
-                        Select Case oper
-                            Case "+"
-                                P_Result = cal + CDbl(TextBox1.Text)
-                            Case "-"
-                                P_Result = cal - CDbl(TextBox1.Text)
-                            Case "*"
-                                P_Result = cal * CDbl(TextBox1.Text)
-                            Case "/"
-                                P_Result = cal / CDbl(TextBox1.Text)
-                        End Select
-                        TextBox1.Text = P_Result
-                        oper = Btn.Text
-
+                    If (Label1.Text <> "") Then
+                        If (Mid(Label1.Text, Label1.Text.Length, 1) <> "=") Then
+                            Label1.Text = Label1.Text + TextBox1.Text + "="
+                            Select Case oper
+                                Case "+"
+                                    P_Result = cal + CDbl(TextBox1.Text)
+                                Case "-"
+                                    P_Result = cal - CDbl(TextBox1.Text)
+                                Case "*"
+                                    P_Result = cal * CDbl(TextBox1.Text)
+                                Case "/"
+                                    P_Result = cal / CDbl(TextBox1.Text)
+                            End Select
+                            TextBox1.Text = P_Result
+                            oper = Btn.Text
+                        Else
+                            TextBox1.Text = P_Result
+                        End If
+                        flag = True
+                    Else
+                        Label1.Text = TextBox1.Text
+                    TextBox1.Text = "0"
                     End If
-                    flag = True
-                Else
-                    TextBox1.Text &= ""
-                End If
 
             Case "."
-                Dim length As Integer = TextBox1.Text.Length() '確認textbox1裡面是否有值
+                    Dim length As Integer = TextBox1.TextLength '確認textbox1裡面是否有值
 
-                If (length > 0) Then
-                    If (TextBox1.Text.Contains(".") = False) Then
-
-                        TextBox1.Text &= "."
-                    End If
-                Else
+                    If (length > 0) Then
+                        If (TextBox1.Text.Contains(".") = False) Then
+                            TextBox1.Text &= "."
+                        End If
+                    Else
                     TextBox1.Text = "0"
-                End If
+                    End If
         End Select
+
         Label2.Text = "flag=" & flag
 
     End Sub
