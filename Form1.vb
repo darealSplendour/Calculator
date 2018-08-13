@@ -1,4 +1,4 @@
-Public Class Form1
+﻿Public Class Form1
 
     Public P_Result As Double = 0, cal As Double = 0, flag As Boolean, oper As String
 
@@ -31,8 +31,7 @@ Public Class Form1
         Dim Btn As Button = CType(sender, Button)
 
         Select Case Btn.Text
-
-            Case "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"
+            Case "1", "2", "3", "4", "5", "6", "7", "8", "9", "0"
                 If (TextBox1.Text = "0") Then
                     Label1.Text = ""
                     TextBox1.Text = ""
@@ -42,8 +41,10 @@ Public Class Form1
                     TextBox1.Text = ""
                     If (oper = "=") Then
                         Label1.Text = ""
+                        oper = ""
                     End If
                 End If
+
                 Label1.Text &= ""
                 TextBox1.Text &= Btn.Text
                 flag = False
@@ -57,7 +58,7 @@ Public Class Form1
                 cal = 0
                 P_Result = 0
                 oper = ""
-                Label2.Text = ""
+                'Label2.Text = ""
 
             Case "←" '減少一位數
                 Dim length As Integer = TextBox1.TextLength
@@ -72,25 +73,50 @@ Public Class Form1
                 Dim length As Integer = TextBox1.TextLength '如果沒輸入數字，長度為0
 
                 If (length > 0) Then
-                    Label1.Text = TextBox1.Text
-                    Dim last_key As Char = Mid(Label1.Text, length, 1)
-
-                    If (last_key = "+" Or last_key = "-" Or last_key = "*" Or last_key = "/" Or last_key = ".") Then '檢查是否重複輸入運算子
-                        Label1.Text = Mid(Label1.Text, 1, length - 1) + Btn.Text
+                    If (oper = "") Then
+                        Label1.Text = TextBox1.Text
+                        cal = CDbl(TextBox1.Text)
                     Else
-                        Label1.Text &= Btn.Text
-                    End If
+                        If (oper = "=") Then
+                            cal = CDbl(TextBox1.Text)
+                            Label1.Text = P_Result
+                        Else
+                            cal = CDbl(Mid(Label1.Text, 1, Label1.Text.Length - 1))
+                        End If
 
-                    cal = CDbl(TextBox1.Text)
-                    oper = Btn.Text
-                    flag = True
-                Else
-                    TextBox1.Text = "0"
+                        Select Case oper
+                            Case "+"
+                                P_Result = cal + CDbl(TextBox1.Text)
+                                Label1.Text = P_Result
+                            Case "-"
+                                P_Result = cal - CDbl(TextBox1.Text)
+                                Label1.Text = P_Result
+                            Case "*"
+                                P_Result = cal * CDbl(TextBox1.Text)
+                                Label1.Text = P_Result
+                            Case "/"
+                                P_Result = cal / CDbl(TextBox1.Text)
+                                Label1.Text = P_Result
+                        End Select
+                    End If
                 End If
 
+                Dim last_key As Char = Mid(Label1.Text, Label1.Text.Length, 1)
+
+                If (last_key = "+" Or last_key = "-" Or last_key = "*" Or last_key = "/" Or last_key = ".") Then '檢查是否重複輸入運算子
+                    Label1.Text = Mid(Label1.Text, 1, Label1.Text.Length - 1) + Btn.Text
+                Else
+                    Label1.Text &= Btn.Text
+                End If
+
+                oper = Btn.Text
+                flag = True
+                TextBox1.Text = ""
+
             Case "="
-                    If (Label1.Text <> "") Then
-                        If (Mid(Label1.Text, Label1.Text.Length, 1) <> "=") Then
+                If (Label1.Text <> "") Then
+                    If (Mid(Label1.Text, Label1.Text.Length, 1) <> "=") Then
+                        If (TextBox1.Text <> "") Then
                             Label1.Text = Label1.Text + TextBox1.Text + "="
                             Select Case oper
                                 Case "+"
@@ -105,27 +131,27 @@ Public Class Form1
                             TextBox1.Text = P_Result
                             oper = Btn.Text
                         Else
-                            TextBox1.Text = P_Result
+                            Label1.Text = ""
+                            TextBox1.Text = cal
                         End If
-                        flag = True
                     Else
-                        Label1.Text = TextBox1.Text
-                    TextBox1.Text = "0"
+                        TextBox1.Text = P_Result
                     End If
+                    flag = True
+                End If
 
             Case "."
-                    Dim length As Integer = TextBox1.TextLength '確認textbox1裡面是否有值
+                Dim length As Integer = TextBox1.TextLength '確認textbox1裡面是否有值
 
-                    If (length > 0) Then
-                        If (TextBox1.Text.Contains(".") = False) Then
-                            TextBox1.Text &= "."
-                        End If
-                    Else
-                    TextBox1.Text = "0"
+                If (length > 0) Then
+                    If (TextBox1.Text.Contains(".") = False) Then
+                        TextBox1.Text &= "."
                     End If
+                Else
+                    TextBox1.Text = "0"
+                End If
         End Select
 
-        Label2.Text = "flag=" & flag
-
     End Sub
+
 End Class
