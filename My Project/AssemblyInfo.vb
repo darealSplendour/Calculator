@@ -8,17 +8,17 @@ Imports System.Runtime.InteropServices
 
 ' 檢閱組件屬性的值
 
-<Assembly: AssemblyTitle("FirstWin")> 
+<Assembly: AssemblyTitle("Calculator")> 
 <Assembly: AssemblyDescription("")> 
 <Assembly: AssemblyCompany("")> 
-<Assembly: AssemblyProduct("FirstWin")> 
+<Assembly: AssemblyProduct("Calculator")> 
 <Assembly: AssemblyCopyright("Copyright ©  2018")> 
 <Assembly: AssemblyTrademark("")> 
 
 <Assembly: ComVisible(False)>
 
 '下列 GUID 為專案公開 (Expose) 至 COM 時所要使用的 typelib ID
-<Assembly: Guid("c1bfdc6b-6614-4e7a-9cc5-b37b22781be1")> 
+<Assembly: Guid("51644c54-f825-4cdb-aaef-e898da36a5e1")> 
 
 ' 組件的版本資訊是由下列四項值構成:
 '
