@@ -1,9 +1,5 @@
-# calculator
-第一個用vb寫的windows form練習程式 
-
-
-
-
+This app is subjected to copyright...
+Any part of it shall not be republished without the consent of ADEDOSU UTHMAN
 start with 20180806
 
 
